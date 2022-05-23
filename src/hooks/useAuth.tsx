@@ -59,8 +59,7 @@ function AuthProvider({ children }: AuthProviderData) {
 
       const { type } = await startAsync({ authUrl });
 
-      // call startAsync with authUrl
-
+    
       // verify if startAsync response.type equals "success" and response.params.error differs from "access_denied"
       // if true, do the following:
 
