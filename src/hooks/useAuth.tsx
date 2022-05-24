@@ -38,7 +38,6 @@ function AuthProvider({ children }: AuthProviderData) {
   const [user, setUser] = useState({} as User);
   const [userToken, setUserToken] = useState('');
 
-
   async function signIn() {
     try {
       setIsLoggingIn(true);
