@@ -70,7 +70,7 @@ export function SignIn() {
               {
                 isLoggingIn
                 ? <ActivityIndicator size='small' color={theme.colors.white} />
-                : <Fontisto name="twitch" size={24} color={theme.colors.white} />
+                : <Fontisto name="twitch" size={20} color={theme.colors.white} />
               }
             </SignInButtonIcon>
 

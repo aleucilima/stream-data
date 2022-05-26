@@ -48,13 +48,13 @@ function AuthProvider({ children }: AuthProviderData) {
       const FORCE_VERIFY = true;
       const STATE = generateRandom(30);
 
-      const authUrl = `${twitchEndpoints.authorization}?
-      client_id=${CLIENT_ID}
-      &redirect_uri=${REDIRECT_URI}
-      &response_type=${RESPONSE_TYPE}
-      &scope=${SCOPE}
-      &force_verify=${FORCE_VERIFY}
-      &state=${STATE}`;
+      const authUrl = twitchEndpoints.authorization + 
+      `?client_id=${CLIENT_ID}` + 
+      `&redirect_uri=${REDIRECT_URI}` + 
+      `&response_type=${RESPONSE_TYPE}` + 
+      `&scope=${SCOPE}` + 
+      `&force_verify=${FORCE_VERIFY}` +
+      `&state=${STATE}`;
 
       const authResponse = await startAsync({ authUrl });
 
@@ -86,15 +86,24 @@ function AuthProvider({ children }: AuthProviderData) {
     try {
       setIsLoggingOut(true);
 
-      // call revokeAsync with access_token, client_id and twitchEndpoint revocation
+      await revokeAsync(
+        { 
+          token: userToken, 
+          clientId: CLIENT_ID 
+        }, 
+        { 
+          revocationEndpoint: twitchEndpoints.revocation 
+        }
+      );
     } catch (error) {
+      console.error(error);
     } finally {
-      // set user state to an empty User object
-      // set userToken state to an empty string
+      setUser({} as User);
+      setUserToken('');
 
-      // remove "access_token" from request's authorization header
-
-      // set isLoggingOut to false
+      delete api.defaults.headers.authorization;
+      
+      setIsLoggingOut(false);      
     }
   }
 
