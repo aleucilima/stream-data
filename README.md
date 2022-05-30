@@ -11,3 +11,5 @@ This application allows the user to quickly and easily access the channels he fo
 * Jest
 * AsyncStorage
 * Authentication with TwitchID
+
+![alt text](./assets/images/Stream-data.png)
